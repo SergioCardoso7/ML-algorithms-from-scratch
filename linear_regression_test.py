@@ -32,7 +32,6 @@ print("Linear Regression accuracy: %f" % accu)
 mse_value = mse(y_test,predicted)
 print(f"MSE on y_test = {mse_value}")
 
-
 y_pred_line = regressor.predict(X)
 cmap = plt.get_cmap("viridis")
 fig = plt.figure(figsize=(8, 6))
