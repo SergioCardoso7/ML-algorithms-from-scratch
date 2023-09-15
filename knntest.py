@@ -27,10 +27,10 @@ plt.show()
 
 from knn import KNN
 
-clf = KNN(k=3)
+clf = KNN(k=7)
 clf.fit(X_train, y_train)
 predictions = clf.predict(X_test)
 
 acc = np.mean(predictions == y_test)
 
-print(acc)
+print(f"The accuracy of the knn algorithm on the iris dataset is {acc*100:.4f}% (k={clf.k})")
