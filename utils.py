@@ -49,7 +49,11 @@ def gradient_descent(X, y, w_in, b_in, cost_function, gradient_function, alpha, 
             cost = cost_function(X,y,w,b)
             J_history.append(cost)
         if (verbose and i % math.ceil(num_iters / 10) == 0) or (verbose and i == num_iters - 1):
-            print(f"Iteration {i} - Cost:{float(J_history[-1]):8.2f}")
+            if logistic:
+                print(f"Iteration {i} - Cost:{float(J_history[-1]):8.2f}")
+            else:
+                print(f"Iteration {i} - Cost:{float(J_history[-1][-1]):8.2f}")
+                
     return w, b, J_history
 
 
