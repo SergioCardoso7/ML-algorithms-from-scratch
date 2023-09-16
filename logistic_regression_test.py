@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn import datasets
 import matplotlib.pyplot as plt
 from logistic_regression import logisticRegression
+import utils as ut
 
 def accuracy(y_true, y_pred):
     return np.mean(y_true == y_pred)
@@ -15,8 +16,11 @@ X_train, X_test, y_train, y_test = train_test_split(X,y, train_size=0.2,random_s
 
 my_threshold = 0.1
 
+X_train = ut.z_score_norm(X_train)
+X_test = ut.z_score_norm(X_test)
+
 regressor = logisticRegression()
-regressor.fit(X_train, y_train,learning_rate=0.001)
+regressor.fit(X_train, y_train,learning_rate=1.8,num_iters=1000)
 predictions = regressor.predict(X_test,my_threshold)
 
 print(f"Logistic Regression accuracy: {accuracy(y_test,predictions)}")
