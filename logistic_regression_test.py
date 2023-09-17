@@ -8,13 +8,12 @@ import utils as ut
 def accuracy(y_true, y_pred):
     return np.mean(y_true == y_pred)
     
-
 bc = datasets.load_breast_cancer()
 X,y = bc.data, bc.target
 
 X_train, X_test, y_train, y_test = train_test_split(X,y, train_size=0.2,random_state=1234)
 
-my_threshold = 0.5
+my_threshold = 0.6
 
 X_train = ut.z_score_norm(X_train)
 X_test = ut.z_score_norm(X_test)
