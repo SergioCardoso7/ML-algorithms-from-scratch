@@ -7,10 +7,10 @@ class LinearRegression:
         self.w = w
         self.b = b
     
-    def fit(self, X, y,learning_rate=0.001, num_iters=1000,verbose=True):
+    def fit(self, X, y,learning_rate=0.001, num_iters=1000,verbose=True,lambda_=0):
         self.w = np.zeros(X.shape[1])
         self.b = 0
-        self.w, self.b, _ = ut.gradient_descent(X,y,self.w,self.b,ut.mse_cost,ut.compute_gradient,learning_rate,num_iters,verbose)
+        self.w, self.b, _ = ut.gradient_descent(X,y,self.w,self.b,ut.mse_cost,ut.compute_gradient,learning_rate,num_iters,verbose,lambda_)
         
     def predict(self,X):
         if self.w is None or self.b is None:

@@ -31,15 +31,15 @@ def compute_gradient(X, y, W, B, logistic=False, lambda_=0):
     dj_db = (1 / X.shape[0]) * np.sum(f_wb - y)  
     return dj_dw, dj_db
 
-def gradient_descent(X, y, w_in, b_in, cost_function, gradient_function, alpha, num_iters, verbose,logistic=False):
+def gradient_descent(X, y, w_in, b_in, cost_function, gradient_function, alpha, num_iters, verbose,lambda_=0,logistic=False):
     w = copy.deepcopy(w_in)
     b = b_in
     J_history = []
     for i in range(num_iters):
-        dj_dw, dj_db = gradient_function(X,y,w,b,logistic)
+        dj_dw, dj_db = gradient_function(X,y,w,b,logistic,lambda_)
         w = w - alpha * dj_dw
         b = b - alpha * dj_db
         if (verbose and i % ceil(num_iters / 10) == 0) or (verbose and i == num_iters - 1):
-            J_history.append(cost_function(X,y,w,b))
+            J_history.append(cost_function(X,y,w,b,lambda_))
             print(f"Iteration {i} - Cost:{float(J_history[-1]):8.2f}")
     return w, b, J_history
