@@ -14,6 +14,12 @@ def mean_norm(X):
 def z_score_norm(X):
     return (X - np.mean(X)) / np.std(X)
 
+def mse_loss(y_true, y_pred):
+    return 0.5 * np.mean(np.square(y_pred - y_true))
+
+def mse_loss_prime(y_true, y_pred):
+    return (y_pred - y_true) / np.size(y_true)
+
 def mse_cost(X,y,W,B,lambda_=0):
     f_wb = np.dot(X,W) + B
     return (1/2) * np.mean(((f_wb - y)**2)) + (lambda_ / (2*X.shape[0])) * np.sum(np.square(W))
@@ -43,3 +49,6 @@ def gradient_descent(X, y, w_in, b_in, cost_function, gradient_function, alpha, 
             J_history.append(cost_function(X,y,w,b,lambda_))
             print(f"Iteration {i} - Cost:{float(J_history[-1]):8.2f}")
     return w, b, J_history
+
+def unit_step_func(X):
+    return np.where(X >=0 , 1, 0)

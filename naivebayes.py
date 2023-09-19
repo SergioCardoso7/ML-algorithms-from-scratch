@@ -9,7 +9,9 @@ Select class with highest probability - Multinomial Naive Bayes Classifier
 
 log function is used to prevent overflow and also the case of one or more of the probabilities being zero
 
-y = argmaxy( log(P(X1|y)) + log(P(X2|y)) + log(P(X3|y)) + log(P(X4|y)) + ... + log(P(y))  ) -> case of one class
+y = ( log(P(X1|y)) + log(P(X2|y)) + log(P(X3|y)) + log(P(X4|y)) + ... + log(P(y))  ) -> case of one class
+
+result = max(y)
 
 Prior probability P(y) : is the frequency
 
@@ -41,7 +43,7 @@ class NaiveBayes:
     def _predict(self,x):
         posteriors = []
         
-        for idx, _ in enumerate(self._classes):
+        for idx, _ in range(self._classes):
             prior = np.log(self._priors[idx])
             class_conditionals = np.sum(np.log(self._prob_dense_func(idx,x)))
             posterior = prior + class_conditionals
