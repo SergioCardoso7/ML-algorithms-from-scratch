@@ -77,3 +77,15 @@ def train(network, loss, loss_prime, x_train, y_train, epochs = 1000, learning_r
         error /= len(x_train)
         if verbose and ((e % ceil(epochs / 10) == 0) or e == epochs -1):
             print(f"{e + 1}/{epochs}, error={error}")
+
+
+def compute_entropy(y):
+    hist = np.bincount(y) # returns an array with the count of occurences of each element
+    ps = hist / len(y)
+    return -np.sum([p * np.log2(p) for p in ps if p > 0])
+    # if len(y) != 0:
+    #     p1 = len([x for x in y if x == 1]) / len(y)
+    #     if p1 != 0 and p1 != 1:
+    #         entropy += -p1 * np.log2(p1) - (1 - p1) * np.log2(1 - p1)
+    
+    # return entropy
