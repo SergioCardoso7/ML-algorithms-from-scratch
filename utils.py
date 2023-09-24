@@ -1,6 +1,7 @@
 import numpy as np
 import copy
 from math import ceil
+from collections import Counter
 
 def eucledian_distance(x1,x2):
     return np.sqrt(np.sum((x1-x2)**2))
@@ -89,3 +90,11 @@ def compute_entropy(y):
     #         entropy += -p1 * np.log2(p1) - (1 - p1) * np.log2(1 - p1)
     
     # return entropy
+def most_common_label(y):
+    counter = Counter(y)
+    return counter.most_common(1)[0][0]
+
+def bootstrap_sample(X,y):
+    n_samples = X.shape[0]
+    idxs = np.random.choice(n_samples, n_samples, replace=True)
+    return X[idxs], y[idxs]

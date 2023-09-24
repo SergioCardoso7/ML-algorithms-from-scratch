@@ -1,7 +1,11 @@
 import numpy as np
 
-from utils import compute_entropy
+from utils import compute_entropy, most_common_label
 from collections import Counter
+
+"""
+single tree decision tree
+"""
 
 class Node():
     
@@ -14,6 +18,7 @@ class Node():
     
     def is_leaf_node(self):
         return self.value is not None
+
 
 class DecisionTree:
     
@@ -33,7 +38,7 @@ class DecisionTree:
         
         #stopping criteria
         if (depth >= self.max_depth or n_labels == 1 or n_samples < self.min_samples_split):
-            leaf_value = self._most_common_label(y)
+            leaf_value = most_common_label(y)
             return Node(value=leaf_value)
         
         feat_idxs = np.random.choice(n_features, self.n_features, replace=False)
@@ -46,10 +51,6 @@ class DecisionTree:
         right = self._grow_tree(X[right_idxs, :], y[right_idxs], depth + 1)
         
         return Node(best_feature,best_thresh,left,right)
-    
-    def _most_common_label(self,y):
-        counter = Counter(y)
-        return counter.most_common(1)[0][0]
     
     def _best_criteria(self, X, y, feat_idxs):
         larger_gain = -1
